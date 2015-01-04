@@ -26,6 +26,11 @@ public class DollarTest {
 		assertFalse(Money.Franc(5).equals(Money.dollar(6)));
 
 	}
+	
+	public void testCurrencty() {
+		assertEquals( "CHF", Money.Franc(1).currency() );
+		assertEquals( "USD", Money.dollar(1).currency() );
+	}
 
 
 }
