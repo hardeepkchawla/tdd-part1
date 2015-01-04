@@ -3,13 +3,10 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 
-public class DollarTest {
+public class MoneyTest {
 	
-	@Test
-	public void testDollar() {
-		//fail("Not yet implemented");
-		//testDifferentClassEquality();
-	}
+	
+	
 	@Test
 	public void testMultiplication() {
 		Money five = Money.dollar(5);
@@ -82,5 +79,29 @@ public class DollarTest {
 		bank.setRate("CHF", "USD", 2);
 		Money result= bank.reduce(fiveBucks.plus(tenFrancs), "USD");
 		assertEquals(Money.dollar(10), result);
-		}
+	}
+	
+	@Test
+	//Test sum plus money
+	public void testSumPlusMoney() {
+		Expression fiveBucks= Money.dollar(5);
+		Expression tenFrancs= Money.franc(10);
+		Bank bank= new Bank();
+		bank.setRate("CHF", "USD", 2);
+		Expression sum= new Sum(fiveBucks, tenFrancs).plus(fiveBucks);
+		Money result= bank.reduce(sum, "USD");
+		assertEquals(Money.dollar(15), result);
+	}
+	
+	@Test
+	//Test of sum and its times
+	public void testSumTimes() {
+		Expression fiveBucks= Money.dollar(5);
+		Expression tenFrancs= Money.franc(10);
+		Bank bank= new Bank();
+		bank.setRate("CHF", "USD", 2);
+		Expression sum= new Sum(fiveBucks, tenFrancs).times(2);
+		Money result= bank.reduce(sum, "USD");
+		assertEquals(Money.dollar(20), result);
+	}
 }
