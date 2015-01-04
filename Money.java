@@ -1,8 +1,8 @@
 
-public abstract class Money {
+public class Money {
 
-	public abstract Money times( int multiplier );
-	public abstract String currency();
+	//public Money times( int multiplier );
+	//public String currency();
 	protected int amount;
 	protected String currency;
 	
@@ -15,8 +15,26 @@ public abstract class Money {
 		return new Dollar(amount, "USD");
 	}
 	
-	public static Money Franc(int amount) {
+	public static Money franc(int amount) {
 		return new Franc(amount, "CHF");
 	}
 	
+	public boolean equals( Object object ) {
+		Money money = (Money) object;
+		return amount == money.amount
+				&& currency.equals( money.currency() );		
+	}
+	
+	public Money times( int multiplier ) {
+		return new Money( amount * multiplier, currency );
+	}
+	
+	/*public Money times( int multiplier ) {
+		amount * multiplier;
+	}*/
+	
+	public String currency() {
+		return currency;
+	}
+
 }
