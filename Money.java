@@ -1,5 +1,5 @@
 
-public class Money {
+public class Money implements Expression {
 
 	//public Money times( int multiplier );
 	//public String currency();
@@ -12,11 +12,11 @@ public class Money {
 	}
 	
 	public static Money dollar(int amount) {
-		return new Dollar(amount, "USD");
+		return new Money(amount, "USD");
 	}
 	
 	public static Money franc(int amount) {
-		return new Franc(amount, "CHF");
+		return new Money(amount, "CHF");
 	}
 	
 	public boolean equals( Object object ) {
@@ -36,5 +36,19 @@ public class Money {
 	public String currency() {
 		return currency;
 	}
+	
+	/*public Money plus(Money addend) {
+		return new Money(amount + addend.amount, currency);
+	}*/
+	
+	public String toString() {
+		return amount + " " + currency;
+	}
+	
+	public Expression plus( Money addend ) {
+		return new Sum( this, addend );
+	}
+	
+	
 
 }
