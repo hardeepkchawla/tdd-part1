@@ -45,7 +45,7 @@ public class Money implements Expression {
 		return amount + " " + currency;
 	}
 	
-	public Expression plus( Expression addend) {
+	public Expression plus( Expression addend ) {
 		return new Sum( this, addend );
 	}
 	
