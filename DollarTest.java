@@ -58,5 +58,29 @@ public class DollarTest {
 		Money result = bank.reduce(sum, "USD");
 		assertEquals(Money.dollar(7), result);
 	}
-
+	
+	@Test
+	//Converting two Franc into Dollar
+	public void testReducedMoneyDifferentCurrency() {
+		Bank bank = new Bank();
+		bank.setRate( "CHF", "USD", 2 );
+		Money result = bank.reduce(Money.franc(2), "USD");
+		assertEquals(Money.dollar(1), result);
+	}
+	
+	@Test
+	//test identity rate
+	public void testIdentityRate() {
+		assertEquals(1, new Bank().rate("USD", "USD"));
+	}
+	@Test
+	//Test mix addition
+	public void testMixedAddition() {
+		Money fiveBucks= Money.dollar(5);
+		Expression tenFrancs= Money.franc(10);
+		Bank bank= new Bank();
+		bank.setRate("CHF", "USD", 2);
+		Money result= bank.reduce(fiveBucks.plus(tenFrancs), "USD");
+		assertEquals(Money.dollar(10), result);
+		}
 }
