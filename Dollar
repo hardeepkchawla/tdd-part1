@@ -2,17 +2,20 @@
 public class Dollar extends Money {
 
 	
-	public Dollar( int amount ) {
-		super(amount);
-		this.amount = amount;
+	public Dollar( int amount, String currency ) {
+		super(amount, currency);
 	}
 	
 	public Money times( int multiplier ) {
-		return new Dollar( amount * multiplier );
+		return Money.dollar( amount * multiplier );
 	}
 	
 	public boolean equals( Object object ) {
 		Money money = ( Money ) object;
 		return this.amount == money.amount && getClass().equals( money.getClass() ) ;
+	}
+	
+	public String currency() {
+		return currency;
 	}
 }
